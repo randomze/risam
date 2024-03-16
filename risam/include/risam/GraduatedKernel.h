@@ -11,8 +11,8 @@
 
 #include <iostream>
 
-using namespace gtsam;
 namespace risam {
+using namespace gtsam;
 class GraduatedKernel {
   /** TYPES **/
  public:

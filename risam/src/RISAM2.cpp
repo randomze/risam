@@ -98,7 +98,7 @@ ISAM2Result RISAM2::update(const NonlinearFactorGraph& newFactors, const Values&
       update.findFluid(roots_, relinKeys, &result.markedKeys, result.details());
       // 6. Update linearization point for marked variables:
       // \Theta_{J}:=\Theta_{J}+\Delta_{J}.
-      UpdateImpl::ExpmapMasked(delta_, relinKeys, &theta_);
+      theta_.retractMasked(delta_, relinKeys);
     }
     result.variablesRelinearized = result.markedKeys.size();
   }
@@ -390,6 +390,8 @@ GaussianFactor::shared_ptr RISAM2::relinearizeFactor(const size_t factor_idx, co
   if (!factor) return GaussianFactor::shared_ptr();
 
   /** Set Inclusion **/
+
+  if(!robustFactor) known_inliers_.insert(factor_idx);
 
   bool known_inlier = known_inliers_.count(factor_idx);
   bool gnc_factor = !known_inlier;

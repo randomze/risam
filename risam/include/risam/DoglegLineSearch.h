@@ -2,9 +2,9 @@
 #include <gtsam/nonlinear/DoglegOptimizerImpl.h>
 
 #pragma once
-using namespace gtsam;
 
 namespace risam {
+using namespace gtsam;
 
 enum DoglegLineSearchType { OUTWARD, MIDPOINT, GOLDEN, GRID };
 

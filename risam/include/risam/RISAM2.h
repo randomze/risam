@@ -26,8 +26,8 @@
 
 #define RISAM_DEBUG false
 
-using namespace gtsam;
 namespace risam {
+using namespace gtsam;
 class RISAM2 : public ISAM2 {
   /** TYPES **/
  public:
@@ -220,6 +220,13 @@ class RISAM2 : public ISAM2 {
 
   VectorValues& getDelta() const;
   Values calculateEstimate() const;
+
+  template <typename VALUE>
+  VALUE calculateEstimate(Key key) const {
+    return ISAM2::calculateEstimate<VALUE>(key);
+  }
+
+  const NonlinearFactorGraph& getFactors() {return getFactorsUnsafe();}
 
   /** @brief Bayes Tree Traversal Functions
    * These functions are used to traverse a bayes tree starting at cliques that include any key in param keys in
